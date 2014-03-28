@@ -540,7 +540,7 @@ function untar() {
   # Process new source
   tar -zxf $OPENSSL_SOURCE
   convert_iso8859_to_utf8 $OPENSSL_DIR
-  cp -rfP $OPENSSL_DIR $OPENSSL_DIR_ORIG
+  cp -RfP $OPENSSL_DIR $OPENSSL_DIR_ORIG
   if [ ! -z $readonly ]; then
     find $OPENSSL_DIR_ORIG -type f -print0 | xargs -0 chmod a-w
   fi
@@ -567,7 +567,7 @@ function applypatches () {
   for i in $OPENSSL_PATCHES; do
     if [ ! "$skip_patch" = "patches/$i" ]; then
       echo "Applying patch $i"
-      patch -p1 --merge < ../patches/$i || die "Could not apply patches/$i. Fix source and run: $0 regenerate patches/$i"
+      patch -p1 < ../patches/$i || die "Could not apply patches/$i. Fix source and run: $0 regenerate patches/$i"
     else
       echo "Skiping patch $i"
     fi
