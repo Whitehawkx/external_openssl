@@ -7,6 +7,20 @@
 # This script performs minor but required patching for the Android build.
 #
 
+# Directories for ENGINE shared libraries
+openssl_cflags_32 += \
+  -DOPENSSLDIR="\"/system/lib/ssl\"" \
+  -DENGINESDIR="\"/system/lib/ssl/engines\""
+openssl_cflags_static_32 += \
+  -DOPENSSLDIR="\"/system/lib/ssl\"" \
+  -DENGINESDIR="\"/system/lib/ssl/engines\""
+openssl_cflags_64 += \
+  -DOPENSSLDIR="\"/system/lib64/ssl\"" \
+  -DENGINESDIR="\"/system/lib64/ssl/engines\""
+openssl_cflags_static_64 += \
+  -DOPENSSLDIR="\"/system/lib64/ssl\"" \
+  -DENGINESDIR="\"/system/lib64/ssl/engines\""
+
 # Intentionally excluded http://b/7079965
 ifneq (,$(filter -DZLIB, $(openssl_cflags)))
 $(error ZLIB should not be enabled in openssl configuration)
@@ -19,11 +33,6 @@ LOCAL_CFLAGS := $(filter-out -DTERMIO, $(LOCAL_CFLAGS))
 ifeq ($(HOST_OS),windows)
 LOCAL_CFLAGS := $(filter-out -DDSO_DLFCN -DHAVE_DLFCN_H,$(LOCAL_CFLAGS))
 endif
-
-# Directories
-LOCAL_CFLAGS += \
-  -DOPENSSLDIR="\"/system/lib/ssl\"" \
-  -DENGINESDIR="\"/system/lib/ssl/engines\""
 
 # Debug
 # LOCAL_CFLAGS += -DCIPHER_DEBUG
