@@ -125,19 +125,11 @@ target_c_includes := $(addprefix external/openssl/,$(common_c_includes)) $(local
 target_src_files  := $(common_src_files) $($(target_arch)_src_files)
 target_src_files  := $(filter-out $($(target_arch)_exclude_files), $(target_src_files))
 
-ifeq ($(HOST_OS)-$(HOST_ARCH),linux-x86)
-ifneq ($(BUILD_HOST_64bit),)
-host_arch := x86_64
+ifeq ($(HOST_OS),linux)
+host_arch := $(HOST_ARCH)
 else
-host_arch := x86
-endif
-else
-ifeq ($(HOST_OS)-$(HOST_ARCH),linux-x86_64)
-host_arch := x86_64
-else
-$(warning Unknown host architecture $(HOST_OS)-$(HOST_ARCH))
+$(warning Unknown host OS $(HOST_OS))
 host_arch := unknown
-endif
 endif
 
 host_c_flags    := $(common_c_flags) $($(host_arch)_c_flags) $(local_c_flags)
