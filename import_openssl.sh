@@ -143,7 +143,7 @@ function gen_asm_mips () {
 function gen_asm_x86 () {
   local OUT
   OUT=$(default_asm_file "$@")
-  $PERL_EXE "$1" elf -fPIC > "$OUT"
+  $PERL_EXE "$1" elf -fPIC $(print_values_with_prefix -D $OPENSSL_CRYPTO_DEFINES_x86) > "$OUT"
 }
 
 function gen_asm_x86_64 () {
@@ -242,6 +242,17 @@ var_value() {
 # Out: variable value (if space-separated list, sorted with no duplicates)
 var_sorted_value() {
   uniq_sort $(var_value $1)
+}
+
+# Print the values in a list with a prefix
+# $1: prefix to use
+# $2+: values of list
+print_values_with_prefix() {
+  declare -r prefix=$1
+  shift
+  for src; do
+    echo -n " $prefix$src "
+  done
 }
 
 # Print the definition of a given variable in a GNU Make build file.
