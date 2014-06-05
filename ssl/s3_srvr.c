@@ -677,6 +677,7 @@ int ssl3_accept(SSL *s)
 
 			s->s3->flags |= SSL3_FLAGS_CCS_OK;
 			/* we should decide if we expected this one */
+			s->s3->flags |= SSL3_FLAGS_CCS_OK;
 			ret=ssl3_get_cert_verify(s);
 			if (ret <= 0) goto end;
 
