@@ -20,7 +20,7 @@ LOCAL_CFLAGS += $(target_c_flags)
 LOCAL_C_INCLUDES += $(target_c_includes)
 LOCAL_SHARED_LIBRARIES = $(log_shared_libraries)
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE:= libssl_static
+LOCAL_MODULE := libssl_static
 LOCAL_ADDITIONAL_DEPENDENCIES := $(local_additional_dependencies)
 include $(BUILD_STATIC_LIBRARY)
 
@@ -43,7 +43,7 @@ LOCAL_CFLAGS += $(target_c_flags)
 LOCAL_C_INCLUDES += $(target_c_includes)
 LOCAL_SHARED_LIBRARIES += libcrypto $(log_shared_libraries)
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE:= libssl
+LOCAL_MODULE := libssl
 LOCAL_ADDITIONAL_DEPENDENCIES := $(local_additional_dependencies)
 include $(BUILD_SHARED_LIBRARY)
 
@@ -56,7 +56,7 @@ LOCAL_CFLAGS += $(host_c_flags)
 LOCAL_C_INCLUDES += $(host_c_includes)
 LOCAL_SHARED_LIBRARIES += libcrypto-host $(log_shared_libraries)
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE:= libssl-host
+LOCAL_MODULE := libssl-host
 LOCAL_ADDITIONAL_DEPENDENCIES := $(local_additional_dependencies)
 include $(BUILD_HOST_SHARED_LIBRARY)
 
@@ -64,11 +64,11 @@ include $(BUILD_HOST_SHARED_LIBRARY)
 # ssltest
 include $(CLEAR_VARS)
 include $(LOCAL_PATH)/android-config.mk
-LOCAL_SRC_FILES:= ssl/ssltest.c
+LOCAL_SRC_FILES := ssl/ssltest.c
 LOCAL_CFLAGS += $(host_c_flags)
 LOCAL_C_INCLUDES += $(host_c_includes)
 LOCAL_SHARED_LIBRARIES := libssl libcrypto $(log_shared_libraries)
-LOCAL_MODULE:= ssltest
+LOCAL_MODULE := ssltest
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(local_additional_dependencies)
 include $(BUILD_EXECUTABLE)
