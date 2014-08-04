@@ -12,6 +12,7 @@ include $(CLEAR_VARS)
 include $(LOCAL_PATH)/android-config.mk
 
 LOCAL_SHARED_LIBRARIES := $(log_shared_libraries)
+LOCAL_C_INCLUDES := $(log_c_includes)
 
 # The static library should be used in only unbundled apps
 # and we don't have clang in unbundled build yet.
@@ -31,6 +32,7 @@ include $(CLEAR_VARS)
 include $(LOCAL_PATH)/android-config.mk
 
 LOCAL_SHARED_LIBRARIES := $(log_shared_libraries)
+LOCAL_C_INCLUDES := $(log_c_includes)
 
 # If we're building an unbundled build, don't try to use clang since it's not
 # in the NDK yet. This can be removed when a clang version that is fast enough
