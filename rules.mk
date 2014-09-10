@@ -16,6 +16,8 @@ MODULE_SRCS += $(addprefix $(LOCAL_DIR)/,$(LOCAL_SRC_FILES_arm))
 
 MODULE_CFLAGS += $(LOCAL_CFLAGS)
 MODULE_CFLAGS += -Wno-error=implicit-function-declaration
+MODULE_CFLAGS += -Wno-empty-body
+MODULE_CFLAGS += -Wno-missing-field-initializers
 
 # Global for other modules which include openssl headers
 GLOBAL_CFLAGS += -DOPENSSL_SYS_TRUSTY
