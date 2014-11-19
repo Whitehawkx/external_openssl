@@ -692,6 +692,9 @@ mips_exclude_files := \
   crypto/aes/aes_core.c \
   crypto/bn/bn_asm.c \
 
+# "Temporary" hack until this can be fixed in openssl.config
+x86_64_c_flags += -DRC4_INT="unsigned int"
+
 target_arch := $(TARGET_ARCH)
 ifeq ($(target_arch)-$(TARGET_HAS_BIGENDIAN),mips-true)
 target_arch := unknown_arch
