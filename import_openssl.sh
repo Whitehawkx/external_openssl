@@ -366,6 +366,12 @@ unknown_arch_exclude_files :=
 
     done
 
+    if [ $prefix -eq "CRYPTO" ]; then
+      echo "
+# \"Temporary\" hack until this can be fixed in openssl.config
+x86_64_cflags += -DRC4_INT=\"unsigned int\""
+    fi
+
     echo "\
 target_arch := \$(TARGET_ARCH)
 ifeq (\$(target_arch)-\$(TARGET_HAS_BIGENDIAN),mips-true)
