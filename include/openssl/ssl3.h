@@ -394,11 +394,12 @@ typedef struct ssl3_buffer_st
 #define TLS1_FLAGS_SKIP_CERT_VERIFY		0x0010
 #define TLS1_FLAGS_KEEP_HANDSHAKE		0x0020
 
-/* SSL3_FLAGS_CCS_OK indicates that a ChangeCipherSpec record is acceptable at
- * this point in the handshake. If this flag is not set then received CCS
- * records will cause a fatal error for the connection. */
+/*
+ * Set when the handshake is ready to process peer's ChangeCipherSpec message.
+ * Cleared after the message has been processed.
+ */
 #define SSL3_FLAGS_CCS_OK			0x0080
- 
+
 /* SSL3_FLAGS_SGC_RESTART_DONE is set when we
  * restart a handshake because of MS SGC and so prevents us
  * from restarting the handshake in a loop. It's reset on a
@@ -460,8 +461,11 @@ typedef struct ssl3_state_st
 	 * and freed and MD_CTX-es for all required digests are stored in
 	 * this array */
 	EVP_MD_CTX **handshake_dgst;
-	/* this is set whenerver we see a change_cipher_spec message
-	 * come in when we are not looking for one */
+	/*
+	 * Set whenever an expected ChangeCipherSpec message is processed.
+	 * Unset when the peer's Finished message is received.
+	 * Unexpected ChangeCipherSpec messages trigger a fatal alert.
+	 */
 	int change_cipher_spec;
 
 	int warn_alert;
