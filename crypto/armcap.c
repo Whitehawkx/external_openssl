@@ -29,6 +29,14 @@ unsigned int OPENSSL_rdtsc(void)
 		return 0;
 	}
 
+#ifdef ANDROID
+// Works around a bug where Android versions up to and including L don't
+// properly restore the signal mask when asked.
+#define sigsetjmp(env,savesigs) \
+	(sigprocmask(SIG_SETMASK,&ill_act.sa_mask,NULL), \
+	 sigsetjmp(env,savesigs))
+#endif
+
 #if defined(__GNUC__) && __GNUC__>=2
 void OPENSSL_cpuid_setup(void) __attribute__((constructor));
 #endif
