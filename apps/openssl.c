@@ -117,6 +117,7 @@
 #include "apps.h"
 #include <openssl/bio.h>
 #include <openssl/crypto.h>
+#include <openssl/rand.h>
 #include <openssl/lhash.h>
 #include <openssl/conf.h>
 #include <openssl/x509.h>
@@ -436,9 +437,7 @@ end:
 	if (prog != NULL) lh_FUNCTION_free(prog);
 	if (arg.data != NULL) OPENSSL_free(arg.data);
 
-	apps_shutdown();
 
-	CRYPTO_mem_leaks(bio_err);
 	if (bio_err != NULL)
 		{
 		BIO_free(bio_err);
@@ -451,6 +450,9 @@ end:
 		OPENSSL_free(Argv);
 		}
 #endif
+	apps_shutdown();
+	CRYPTO_mem_leaks(bio_err);
+
 	OPENSSL_EXIT(ret);
 	}
 
