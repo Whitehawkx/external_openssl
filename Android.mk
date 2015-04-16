@@ -1,5 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 
+
 # Enable to be able to use ALOG* with #include "cutils/log.h"
 #log_c_includes += system/core/include
 #log_shared_libraries := liblog
